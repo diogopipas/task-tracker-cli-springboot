@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
 
 @Repository
 public class TaskRepository {
@@ -43,7 +42,7 @@ public class TaskRepository {
             objectMapper.writerWithDefaultPrettyPrinter()
                         .writeValue(new File(FILE_NAME), tasks);
         } catch (IOException e){
-            throw new RuntimeException("Could not write tasks to" + FILE_NAME, e);
+            throw new RuntimeException("Could not write tasks to " + FILE_NAME, e);
         }
     }
 }
