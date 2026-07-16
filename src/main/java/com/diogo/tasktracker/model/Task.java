@@ -62,4 +62,9 @@ public class Task {
     public void setUpdatedAt(LocalDateTime updatedAt){
         this.updatedAt = updatedAt;
     }
+    
+    @Override
+    public String toString(){
+        return "Task " + getId() + ": " + getDescription() + ", Status: " + getStatus().getValue() + "\n";
+    }
 }

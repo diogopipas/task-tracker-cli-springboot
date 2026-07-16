@@ -2,6 +2,9 @@ package com.diogo.tasktracker.cli;
 
 import com.diogo.tasktracker.model.Task;
 import com.diogo.tasktracker.service.TaskService;
+
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -21,18 +24,54 @@ public class TaskCliRunner implements CommandLineRunner{
             return;
         }
         String command = args[0];
-
-        switch (command) {
-            case "add" -> {
-                if (args.length < 2) {
-                    System.out.println("Usage: add \"your task description\"");
-                    return;
+        try{
+            switch (command) {
+                case "add" -> {
+                    if (args.length < 2) {
+                        System.out.println("Usage: add \"your task description\"");
+                        return;
+                    }
+                    String description = args[1];
+                    Task task = taskService.addTask(description);
+                    System.out.println("Task added successfully (ID: " + task.getId() + ")");
                 }
-                String description = args[1];
-                Task task = taskService.addTask(description);
-                System.out.println("Task added successfully (ID: " + task.getId() + ")");
+                case "update" -> {
+                    if (args.length < 3) {
+                        System.out.println("Usage: update <id> \"your task description\"");
+                        return;
+                    }
+                    int id = Integer.parseInt(args[1]);
+                    String description = args[2];
+                    taskService.updateTask(id, description);
+
+                }
+                case "list" -> {
+                    String status = (args.length == 2) ? args[1] : null;
+                    List<Task> tasks = taskService.listTasks(status);
+                    if(tasks.isEmpty()){
+                        System.out.println("No tasks found.");
+                    } else {
+                        for(Task task : tasks) {
+                            System.out.println(task);
+                        }
+                    }
+                }
+                case "delete" -> {
+                    int id = Integer.parseInt(args[1]);
+                    Task task = taskService.deleteTask(id);
+                    if(task == null){
+                        System.out.println("No such task exists");
+                        return;
+                    }
+                    System.out.println("Task " + id + " was successfully deleted");
+
+                }
+                default -> System.out.println("Unknown command: " + command);
             }
-            default -> System.out.println("Unknown command: " + command);
+        } catch (NumberFormatException e){
+            System.out.println("The id must be a whole number.");
+        } catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
