@@ -65,6 +65,6 @@ public class Task {
     
     @Override
     public String toString(){
-        return "Task " + getId() + ": " + getDescription() + ", Status: " + getStatus().getValue() + "\n";
+        return "Task " + getId() + ": " + getDescription() + ", Status: " + getStatus().getValue();
     }
 }

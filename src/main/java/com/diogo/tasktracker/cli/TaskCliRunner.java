@@ -43,7 +43,7 @@ public class TaskCliRunner implements CommandLineRunner{
                     int id = Integer.parseInt(args[1]);
                     String description = args[2];
                     taskService.updateTask(id, description);
-
+                    System.out.println("Task " + id + " updated successfully");
                 }
                 case "list" -> {
                     String status = (args.length == 2) ? args[1] : null;
@@ -57,14 +57,24 @@ public class TaskCliRunner implements CommandLineRunner{
                     }
                 }
                 case "delete" -> {
+                    if(args.length < 2){
+                        System.out.println("Usage: delete <id>");
+                    }
                     int id = Integer.parseInt(args[1]);
-                    Task task = taskService.deleteTask(id);
-                    if(task == null){
-                        System.out.println("No such task exists");
+                    taskService.deleteTask(id);
+                    System.out.println("Task " + id + " was successfully deleted");
+                }
+                case "mark" -> {
+                    if(args.length < 3){
+                        System.out.println("Usage: mark <todo/in-progress/done> <id>");
                         return;
                     }
-                    System.out.println("Task " + id + " was successfully deleted");
+                    String status = args[1];
+                    int id = Integer.parseInt(args[2]);
 
+                    taskService.markTask(status, id);
+                    
+                    System.out.println("Task " + id + "'s status was successfully changed to " + status);
                 }
                 default -> System.out.println("Unknown command: " + command);
             }

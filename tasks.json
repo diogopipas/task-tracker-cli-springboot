@@ -2,12 +2,12 @@
   "id" : 1,
   "description" : "Buy groceries and cook dinner",
   "status" : "todo",
-  "createdAt" : "2026-07-14T23:18:33.318981",
-  "updatedAt" : "2026-07-14T23:18:33.320567"
+  "createdAt" : "2026-07-16T22:11:22.686863",
+  "updatedAt" : "2026-07-16T22:11:49.785791"
 }, {
   "id" : 2,
-  "description" : "Feed cats",
-  "status" : "todo",
-  "createdAt" : "2026-07-16T16:17:43.841027",
-  "updatedAt" : "2026-07-16T16:17:43.842817"
+  "description" : "Write report",
+  "status" : "in-progress",
+  "createdAt" : "2026-07-16T22:11:26.551967",
+  "updatedAt" : "2026-07-16T22:11:26.553573"
 } ]

@@ -1,7 +1,10 @@
 package com.diogo.tasktracker.service;
 
 import com.diogo.tasktracker.model.Task;
+import com.diogo.tasktracker.model.Status;
 import com.diogo.tasktracker.repository.TaskRepository;
+
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -87,7 +90,7 @@ public class TaskService {
         Task task = findById(tasks, id);
 
         if(task == null){
-            return null;
+            throw new IllegalArgumentException("Task not found with id: " + id);
         }
 
         tasks.remove(tasks.indexOf(task));
@@ -95,6 +98,22 @@ public class TaskService {
         return task;
     }
 
+    public Task markTask(String status, int id){
+        List<Task> tasks = taskRepository.load();
+
+        Task task = findById(tasks, id);
+
+        if(task == null){
+            throw new IllegalArgumentException("Task not found with id: " + id);
+        }
+
+        task.setStatus(Status.fromValue(status));
+        task.setUpdatedAt(LocalDateTime.now());
+
+        taskRepository.save(tasks);
+        return task;
+        
+    }
 
 
 }
