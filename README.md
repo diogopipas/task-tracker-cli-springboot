@@ -174,7 +174,7 @@ Example file contents:
 
 ## Project structure
 
-The application follows a layered architecture. Each layer has a single responsibility and only communicates with the layer directly beneath it.
+The application follows a layered architecture. Each layer has a single responsibility and depends only on the layer directly beneath it — dependencies point downwards, never upwards.
 
 ```
 src/main/java/com/diogo/tasktracker/
