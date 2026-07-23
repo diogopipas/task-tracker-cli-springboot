@@ -4,7 +4,6 @@ import com.diogo.tasktracker.model.Task;
 import com.diogo.tasktracker.model.Status;
 import com.diogo.tasktracker.repository.TaskRepository;
 
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
