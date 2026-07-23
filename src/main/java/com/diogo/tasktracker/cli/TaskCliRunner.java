@@ -59,6 +59,7 @@ public class TaskCliRunner implements CommandLineRunner{
                 case "delete" -> {
                     if(args.length < 2){
                         System.out.println("Usage: delete <id>");
+                        return;
                     }
                     int id = Integer.parseInt(args[1]);
                     taskService.deleteTask(id);
